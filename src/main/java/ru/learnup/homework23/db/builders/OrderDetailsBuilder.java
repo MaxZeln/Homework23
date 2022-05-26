@@ -1,16 +1,23 @@
 package ru.learnup.homework23.db.builders;
 
+import ru.learnup.homework23.db.model.Book;
+import ru.learnup.homework23.db.model.Order;
 import ru.learnup.homework23.db.model.Order_Details;
 
 public class OrderDetailsBuilder {
 
     private int id;
-    private int book_id;
+    private Book book;
+    private Order order;
     private int amount;
     private int price;
 
-    public OrderDetailsBuilder withBookId(int book_id) {
-        this.book_id = book_id;
+    public OrderDetailsBuilder withBookId(Book book) {
+        this.book = book;
+        return this;
+    }
+    public OrderDetailsBuilder withOrder(Order order) {
+        this.order = order;
         return this;
     }
 
@@ -26,9 +33,10 @@ public class OrderDetailsBuilder {
 
     public Order_Details build() {
         Order_Details order_details = new Order_Details();
+        order_details.setOrder(order);
         order_details.setAmount(amount);
         order_details.setPrice(price);
-        order_details.setBook_id(book_id);
+        order_details.setBook(book);
         return order_details;
     }
 

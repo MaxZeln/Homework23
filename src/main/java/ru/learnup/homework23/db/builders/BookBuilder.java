@@ -1,23 +1,24 @@
 package ru.learnup.homework23.db.builders;
 
+import ru.learnup.homework23.db.model.Author;
 import ru.learnup.homework23.db.model.Book;
 
 public class BookBuilder {
 
     private int id;
     private String title;
-    private int author_id;
     private String publishing_year;
     private int pages;
     private int price;
+    private Author author;
 
     public BookBuilder withTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public BookBuilder withAuthorId(int author_id) {
-        this.author_id = author_id;
+    public BookBuilder withAuthor(Author author) {
+        this.author = author;
         return this;
     }
 
@@ -40,7 +41,7 @@ public class BookBuilder {
     public Book build() {
         Book book = new Book();
         book.setTitle(title);
-        book.setAuthor_id(author_id);
+        book.setAuthor(author);
         book.setPublishing_year(publishing_year);
         book.setPages(pages);
         book.setPrice(price);

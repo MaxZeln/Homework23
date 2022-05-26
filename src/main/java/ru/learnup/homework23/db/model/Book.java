@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -20,9 +21,6 @@ public class Book {
     private String title;
 
     @Column(nullable = false)
-    private int author_id;
-
-    @Column(nullable = false)
     private String publishing_year;
 
     @Column(nullable = false)
@@ -31,11 +29,12 @@ public class Book {
     @Column(nullable = false)
     private int price;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private Author author;
 
-//    @JoinColumn
-//    @ManyToOne
-//    private Author author;
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book")
+    private List<Order_Details> order_details;
 
 
     @Override
@@ -46,7 +45,7 @@ public class Book {
                 ", publishing_year='" + publishing_year + '\'' +
                 ", number_of_pages=" + pages +
                 ", price=" + price +
-                ", author_id=" + author_id +
+                ", author=" + author +
                 '}';
     }
 }

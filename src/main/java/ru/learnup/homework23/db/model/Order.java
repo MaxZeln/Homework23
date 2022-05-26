@@ -6,6 +6,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -17,33 +18,14 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JoinColumn
-    @OneToOne
-    @Fetch(value = FetchMode.SELECT)
-    private Order_Details order_details;
-
-    @JoinColumn
-    @OneToOne
-    @Fetch(value = FetchMode.SELECT)
-    private Buyer buyer;
-
     @Column(nullable = false)
     private int purchase_amount;
 
-    //    @Column(nullable = false)
-    //    private int buyer_id;
-    //
-    //    @Column(nullable = false)
-    //    private int order_details_id;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    private List<Order_Details> order_details;
 
-    public Order(Buyer buyer,Order_Details order_details) {
-        this.buyer = buyer;
-        this.order_details = order_details;
-        purchase_amount = order_details.getPrice();
-    }
-
-    public Order() {
-
-    }
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
 
 }

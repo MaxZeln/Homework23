@@ -27,4 +27,10 @@ public class Buyer {
     @Column(nullable = false)
     private String birthday;
 
+
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "order_id")
+//    private Order order;
+
+
 }

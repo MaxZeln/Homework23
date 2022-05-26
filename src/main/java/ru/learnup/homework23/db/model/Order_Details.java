@@ -18,12 +18,16 @@ public class Order_Details {
     private int id;
 
     @Column(nullable = false)
-    private int book_id;
-
-    @Column(nullable = false)
     private int amount;
 
     @Column(nullable = false)
     private int price;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
 }

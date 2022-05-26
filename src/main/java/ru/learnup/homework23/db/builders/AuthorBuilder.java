@@ -1,6 +1,9 @@
 package ru.learnup.homework23.db.builders;
 
 import ru.learnup.homework23.db.model.Author;
+import ru.learnup.homework23.db.model.Book;
+
+import java.util.List;
 
 public class AuthorBuilder {
 
@@ -8,6 +11,7 @@ public class AuthorBuilder {
     private String name;
     private String surname;
     private String patronymic;
+    private List<Book> books;
 
 
     public AuthorBuilder withName(String name) {
@@ -25,6 +29,10 @@ public class AuthorBuilder {
         return this;
     }
 
+    public AuthorBuilder withBooks(List<Book> books) {
+        this.books = books;
+        return this;
+    }
 
 
     public Author build() {
